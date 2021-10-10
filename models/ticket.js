@@ -10,6 +10,10 @@ class Ticket{
     loadRoomFromArray(e){
         this._room = e;
     }
+
+    getRoom(){
+        return this._room;
+    }
     
     showRoom(){
         console.log(`┌──────────────────┐`.cyan);
@@ -29,6 +33,31 @@ class Ticket{
         });
         console.log(`└────────────  ────┘`.cyan);
         console.log(`        EXIT      `.cyan);
+    }
+
+    ShowCollection(){
+        let colletction = 0, tickets = 0, p = 7.25;
+        this._room.forEach(n => {
+            n.forEach(e => {
+                colletction += e === true ? p : 0, tickets += e === true ? 1 : 0;
+            });
+        })
+        console.log(`Ticket price: ${`${p+'$'}`.green}`);
+        console.log(`Tickets sold: ${`${tickets}`.green}`);
+        console.log(`Total earned ${`${colletction+'$'}`.green}`);
+
+    }
+
+    newTicket(e){
+        let {row, seat} = e;
+        this._room[row][seat] = true;
+        console.log('Ticket created successfully'.green);
+    }
+
+    delte(e){
+        let {row, seat} = e;
+        this._room[row][seat] = false;
+        console.log('ticket deleted successfully'.green);
     }
 }
 
